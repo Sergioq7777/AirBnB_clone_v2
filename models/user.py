@@ -1,11 +1,13 @@
 #!/usr/bin/python3
 """This is the user class"""
-from sqlalchemy import Column, Integer, String, ForeignKey
 from models.base_model import BaseModel, Base
+import models
+from os import getenv
 from sqlalchemy.orm import relationship
+from sqlalchemy import Column, String
 
 
-class User(BaseModel, Base):
+class User(BaseModel):
     """This is the class for user
     Attributes:
         email: email address
@@ -13,12 +15,28 @@ class User(BaseModel, Base):
         first_name: first name
         last_name: last name
     """
-    __tablename__ = 'users'
-    email = Column(String(128), nullable=False)
-    password = Column(String(128), nullable=False)
-    first_name = Column(String(128), nullable=True)
-    last_name = Column(String(128), nullable=True)
-    places = relationship("Place", cascade='all, delete-orphan',
-                          backref='user')
-    reviews = relationship("Review", cascade='all, delete-orphan',
-                          backref='user')
+    if getenv('HBNB_TYPE_STORAGE') == 'db':
+        __tablename__ = 'users'
+        email = Column(String(128),
+                       nullable=False)
+        password = Column(String(128),
+                          nullable=False)
+        first_name = Column(String(128),
+                            nullable=True)
+        last_name = Column(String(128),
+                           nullable=True)
+        places = relationship("Place",
+                              backref="user",
+                              cascade="all, delete-orphan")
+        reviews = relationship("Review",
+                               backref="user",
+                               cascade="all, delete-orphan")
+    else:
+        email = ""
+        password = ""
+        first_name = ""
+        last_name = ""
+
+    def __init__(self, *args, **kwargs):
+        """initializes user"""
+        super().__init__(*args, **kwargs)
