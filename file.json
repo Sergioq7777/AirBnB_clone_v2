@@ -1,1 +1,1 @@
-{"User.93b06281-bd44-4015-bbe8-1fa0c298c691": {"id": "93b06281-bd44-4015-bbe8-1fa0c298c691", "created_at": "2018-06-14T09:45:52.369371", "updated_at": "2018-06-14T09:47:36.040444", "hello": "world", "__class__": "User"}}
+{"BaseModel.ddc7eaf3-c87d-4f42-8b7f-2ab1de1b1149": {"id": "ddc7eaf3-c87d-4f42-8b7f-2ab1de1b1149", "created_at": "2020-04-02T16:35:58.787823", "updated_at": "2020-04-02T16:35:58.787841", "__class__": "BaseModel"}}
