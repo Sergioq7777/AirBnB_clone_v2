@@ -9,10 +9,6 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
-"""All Classes"""
-classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
-           "Place": Place, "Review": Review, "State": State, "User": User}
-
 
 class FileStorage:
     """This class serializes instances to a JSON file and
