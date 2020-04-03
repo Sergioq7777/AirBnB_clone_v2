@@ -43,5 +43,13 @@ Ex:
 
 #### Quit
 `quit` or `EOF`
+#### Help
+`help` or `help <command>`
+Ex:
+`help` or `help quit`
+
+Additionally, the console supports `<class name>.<command>(<parameters>)` syntax.
+Ex:
+`City.show(my_city_id)`
 
 
