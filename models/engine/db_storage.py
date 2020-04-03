@@ -38,3 +38,49 @@ class DBStorage:
         if test == 'test':
             Base.metadata.drop_all(bind=self.__engine)
 
+
+    def all(self, cls=None):
+        """Queries the current db session"""
+        return_dict = {}
+        if cls:
+            query_result = []
+            try:
+                if isinstance(cls, str):
+                    query_result = self.__session.query(eval(cls)).all()
+                else:
+                    query_result = self.__session.query(cls).all()
+            except:
+                pass
+        else:
+            query_result = []
+            query_result += self.__session.query(State).all()
+            query_result += self.__session.query(City).all()
+            query_result += self.__session.query(User).all()
+            query_result += self.__session.query(Place).all()
+        for obj in query_result:
+            key = "{}.{}".format(type(obj).__name__, obj.id)
+            return_dict[key] = obj
+        return return_dict
+
+    def new(self, obj):
+        """Adds object to current database session"""
+        self.__session.add(obj)
+
+    def save(self):
+        """Commits all changes the current database session"""
+        self.__session.commit()
+
+    def delete(self, obj=None):
+        """Delete obj from current DB session"""
+        if obj:
+            self.__session.delete(obj)
+
+    def reload(self):
+        """Create all tables in the DB"""
+        Base.metadata.create_all(self.__engine)
+        self.__session = scoped_session(sessionmaker(bind=self.__engine,
+                                                     expire_on_commit=False))()
+
+    def close(self):
+        """Close the current session"""
+        self.__session.close()
