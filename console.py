@@ -13,6 +13,7 @@ from models.place import Place
 from models.review import Review
 import shlex
 from shlex import split
+import re
 
 """All Classes"""
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
@@ -52,7 +53,10 @@ class HBNBCommand(cmd.Cmd):
         else:
             kwargs = {}
             for arg in args[1:]:
-                match = re.fullmatch('(?P<key>[a-zA-Z_]\w*)=(?:',
+                match = re.fullmatch('(?P<key>[a-zA-Z_]\w*)=(?:'
+                                     '(?P<int>\d+)|'
+                                     '(?P<float>\d*\.\d*)|'
+                                     '(?P<string>.*))',
                                      arg)
                 match = match.groupdict()
                 if match['string']:
