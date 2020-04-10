@@ -15,6 +15,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from os import getenv
 
+
 class DBStorage:
     """SQL DB Engine"""
 
@@ -36,6 +37,7 @@ class DBStorage:
                                       pool_pre_ping=True)
         if test == 'test':
             Base.metadata.drop_all(bind=self.__engine)
+
 
     def all(self, cls=None):
         """Queries the current db session"""
