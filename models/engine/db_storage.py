@@ -1,8 +1,5 @@
 #!/usr/bin/python3
-"""Database storage engine using SQLAlchemy with a mysql+mysqldb database
-connection.
-"""
-
+"""This is the SQL DB class for AirBnB"""
 import json
 from models.base_model import BaseModel, Base
 from models.user import User
@@ -37,7 +34,6 @@ class DBStorage:
                                       pool_pre_ping=True)
         if test == 'test':
             Base.metadata.drop_all(bind=self.__engine)
-
 
     def all(self, cls=None):
         """Queries the current db session"""
